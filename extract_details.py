@@ -6,9 +6,11 @@ import json
 
 
 
+llm = OllamaLLM(model="llama3.2:1b",
+                temperature=0,
+                base_url="http://ollama:11434")
 
 def extract_details(document_text):
-    llm = OllamaLLM(model="llama3.2:1b", temperature=0)
 
 
     system_message = SystemMessagePromptTemplate.from_template(
@@ -71,6 +73,5 @@ def compare_details(resume_details, job_offer_details):
     - Missing experiences: [list them]
     """
     
-    llm = OllamaLLM(model="llama3.2:1b", temperature=0)
     return llm.invoke(prompt)
     
