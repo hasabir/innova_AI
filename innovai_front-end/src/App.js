@@ -1,9 +1,11 @@
 import "./App.css";
 import React, { useState } from "react";
 import TextareaAutosize from "react-textarea-autosize";
+import Popup from "./Popup";
 
 function App() {
     const [fileName, setFileName] = React.useState("");
+    const [isPopupVisible, setIsPopupVisible] = useState(false);
 
     const handleFileChange = (e) => {
         const file = e.target.files[0];
@@ -12,46 +14,50 @@ function App() {
         }
     };
 
+    const handleSubmit = () => {
+        setIsPopupVisible(true);
+    };
+
+    const closePopup = () => {
+        setIsPopupVisible(false);
+    };
+
     return (
         <div className="flex justify-center items-center h-screen">
-            <div className="bg-[#ccdad1] w-[80%] h-[80vh] text-center flex justify-center items-center relative rounded-3xl container-shadow">
+            <div className="bg-[#ced4da] w-[80%] h-[80vh] text-center flex justify-center items-center relative rounded-xl container-shadow">
                 <div>
                     <img
                         src="logo.png"
                         alt="logo"
-                        className="w-36 h-36 absolute left-0 top-0 rounded-3xl"
+                        className="w-36 h-36 absolute left-0 top-0 rounded-xl"
                     />
                 </div>
                 <div className="flex flex-col w-1/2">
-                    <label
-                        htmlFor="query"
-                        className="text-gray-500 text-base font-semibold mb-1 text-left"
-                    >
-                        Your Query <span className="text-red-500">*</span>
-                    </label>
-                    <TextareaAutosize
-						minRows={2} 
-                        id="query"
-                        className="textarea textarea-primary text-base caret-secondary"
-                        placeholder="Enter your query here"
-                    />
+                    <p className="mb-4 text-lg text-neutral text-justify">
+                        Upload your resume (PDF format) and paste a job offer
+                        description to discover what skills, experiences, or
+                        tools might be missing from your resume
+                    </p>
+                    <hr className="border-secondary" />
                     <label
                         htmlFor="jobDescription"
-                        className="text-gray-500 text-base font-semibold mt-2 mb-1 text-left"
+                        className="text-gray-500 text-lg font-semibold mt-2 mb-1 text-left"
                     >
-                        Job Description (Optional)
+                        Job Description <span className="text-red-500">*</span>
                     </label>
                     <TextareaAutosize
-						minRows={2} 
+                        minRows={2}
+                        maxRows={8}
                         id="jobDescription"
                         className="textarea textarea-primary text-base caret-secondary"
                         placeholder="Enter job description here"
                     />
                     <div className="flex mt-4">
                         <button
-                            className="btn btn-secondary mr-3"
+                            className="btn btn-primary mr-3"
                             type="submit"
                             value="Submit"
+                            onClick={handleSubmit}
                         >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -71,7 +77,10 @@ function App() {
                                 Submit
                             </span>
                         </button>
-                        <label htmlFor="fileUpload" className="btn btn-accent">
+                        <label
+                            htmlFor="fileUpload"
+                            className="btn btn-secondary"
+                        >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="none"
@@ -104,6 +113,19 @@ function App() {
                     </div>
                 </div>
             </div>
+            {isPopupVisible && (
+                <Popup
+                    onClose={closePopup}
+                >
+					<p>
+					&emsp;&emsp;Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+					</p>
+					<br/>
+					<p>
+					&emsp;&emsp;Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+					</p>
+				</Popup>
+            )}
         </div>
     );
 }
