@@ -10,7 +10,7 @@ if __name__ == "__main__":
         result = subprocess.run(["docker", "ps"], capture_output=True, text=True, check=True)
         if container_name not in result.stdout:
             subprocess.run(["docker-compose", "up", "-d"])
-            # subprocess.run(["docker", "exec", "-it", "ollama", "ollama", "pull", model_name], check=True)
+            subprocess.run(["docker", "exec", "-it", "ollama", "ollama", "pull", model_name], check=True)
     except Exception as e:
         print(f"An error occurred: {e}")
 
