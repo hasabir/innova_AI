@@ -34,7 +34,6 @@ def extract_details(document_text):
 
     result = chain.run({"resume_text": document_text})
 
-    print("Raw LLM Result:", result)
 
     try:
         start_idx = result.find("{")

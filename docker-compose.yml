@@ -1,19 +1,33 @@
 version: '3.8'
 
 services:
-  u_jump:
+  innovai_backend:
     build:
       context: .
       dockerfile: Dockerfile
     ports:
       - "8000:8000"
-    container_name: u_jump
+    container_name: innovai_backend
     depends_on:
       - ollama
     networks:
       - ollama-docker
-      - u_jump-docker
+      - innovai_backend-docker
+      - innovai_frontend-docker
 
+
+  innovai_frontend:
+    build:
+      context: ./innovai_front-end
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    container_name: innovai_frontend
+    networks:
+      - innovai_backend-docker
+      - innovai_frontend-docker
+    depends_on:
+      - innovai_backend
 
   ollama:
     image: ollama/ollama:latest
@@ -29,11 +43,13 @@ services:
       - OLLAMA_MAX_LOADED_MODELS=4
     networks:
       - ollama-docker
-      - u_jump-docker
+      - innovai_backend-docker
   
 networks:
   ollama-docker:
-    external: false
+    # external: false
     name: ollama
-  u_jump-docker:
-    name: u_jump
+  innovai_backend-docker:
+    name: innovai_backend
+  innovai_frontend-docker:
+    name: innovai_frontend
