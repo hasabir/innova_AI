@@ -72,6 +72,17 @@ Whether you're a **recent graduate** or pursuing a **career switch**, U-Jump pro
 - **Backend**: Flask  
 - **AI Models**: llama3.2:1b  
 ---
+## ▶️ How to Run   
+
+To get started with **U-Jump**, clone the repository, and run the application:
+
+```bash
+git clone https://github.com/hasabir/innova_AI.git
+cd u-jump
+python main.py
+```
+---
+
 ### 💡 "Jumpstart your career with U-Jump. Let’s land your dream job together!" 🎉
 
 
