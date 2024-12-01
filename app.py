@@ -40,10 +40,10 @@ def create_app(app):
             resume_details = extract_details(data)
             job_offer_details = extract_details(job_offer_text)
             
-            if "error" in resume_details:
-                return jsonify({"error": f"Resume parsing error: {resume_details['error']}"}), 500
-            if "error" in job_offer_details:
-                return jsonify({"error": f"Job offer parsing error: {job_offer_details['error']}"}), 500
+            # if "error" in resume_details:
+            #     return jsonify({"error": f"Resume parsing error: {resume_details['error']}"}), 500
+            # if "error" in job_offer_details:
+            #     return jsonify({"error": f"Job offer parsing error: {job_offer_details['error']}"}), 500
 
 
             response = compare_details(resume_details, job_offer_details)
